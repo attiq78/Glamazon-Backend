@@ -11,7 +11,8 @@ const createDefaultAdmin = async () => {
         email: 'attiq1367@gmail.com',
         name: 'attique',
         phone: '03007081317',
-        password: 'test11221122'
+        password: 'test11221122',
+        isDefaultAdmin: true
       });
 
       await admin.save();

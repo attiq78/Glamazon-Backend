@@ -3,18 +3,16 @@ const User = require('../models/User');
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    
-    if (!token) {
-      throw new Error();
-    }
+    const authHeader = req.header('Authorization');
+    if (!authHeader) throw new Error('Missing Authorization header');
+
+    const token = authHeader.replace('Bearer ', '').trim();
+    if (!token) throw new Error('Missing token');
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findOne({ _id: decoded.userId });
+    const user = await User.findById(decoded.userId);
 
-    if (!user) {
-      throw new Error();
-    }
+    if (!user) throw new Error('User not found');
 
     req.user = user;
     req.token = token;
@@ -24,4 +22,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth; 
+module.exports = auth;

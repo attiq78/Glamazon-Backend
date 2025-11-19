@@ -28,6 +28,16 @@ const appointmentSchema = new mongoose.Schema({
       required: true
     }
   },
+  hairstyle: {
+    name: {
+      type: String,
+      default: ''
+    },
+    image: {
+      type: String,
+      default: ''
+    }
+  },
   status: {
     type: String,
     enum: ['approved', 'completed', 'cancelled'],

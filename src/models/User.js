@@ -27,6 +27,14 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  lastLogin: {
+    type: Date,
+    default: null
+  },
+  isDefaultAdmin: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true
